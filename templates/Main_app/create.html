@@ -1,0 +1,36 @@
+{% extends 'Main_app/base.html' %}
+{% load crispy_forms_filters %}
+{% block title %}
+ |Add
+{% endblock  %}
+{% block content %}
+{% include 'Main_app/navbar.html' %}
+
+
+
+    <style>
+    .asteriskField{
+        display: none;
+    }
+    </style>
+<div style="margin-top:90px;margin-bottom:40px;" class=" container">
+    <div class="row justify-content-center">
+        <div class="col-sm-4">
+
+
+            <form action="{% url 'create' %}" enctype="multipart/form-data" method="POST" class="shadow py-4 px-3 mt-3">
+                {% csrf_token %}
+                <div class="breadcrumb-text">
+                <p class="text-center mb-3 ">List Your Vehicle</p>
+               </div>
+
+                {{ form | crispy }}
+                <button class="btn btn-dark rounded-0 w-100">Create</button>
+
+            </form>
+        </div>
+    </div>
+</div>
+{% include 'Main_app/footer.html' %}
+
+{% endblock %}

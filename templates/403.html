@@ -1,0 +1,17 @@
+{% extends 'Main_app/base.html' %}
+{% load humanize %}
+{% block title %}
+    Forbidden!!
+{% endblock %}
+{% block content %}
+    <div class="container vh-100  d-flex justify-content-center align-itema-center mt-100">
+        <div class="content text-center">
+            <h1 class="text-black-50 mb-5" style="font-size: 300px">403</h1>
+            <p class="text-danger mt-100">
+                You are forbidden from accessing this page
+
+            </p>
+             <a class="btn btn-primary" href="{% url 'home' %}">Go Home</a>
+        </div>
+    </div>
+{% endblock %}

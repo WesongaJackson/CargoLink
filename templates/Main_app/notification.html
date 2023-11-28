@@ -1,0 +1,25 @@
+{% extends "Main_app/base.html" %}
+
+{% load static %}
+{% block title %}
+    |Notification
+{% endblock %}
+{% block content %}
+    {% include 'Main_app/navbar.html' %}
+    <div class="container mt-100  mb-80">
+        <h2 class="display-4 text-dark">Notification</h2>
+        {% if notification %}
+
+                <div class="card shadow w-50 mx-auto m-4 p-4">
+                <h5 class="card-title">Payment Booked</h5>
+                    <p class="card-text">{{ notification.message }}</p>
+                    <p class="card-text"><small class="text-muted"> {{ notification.created_at }}</small></p>
+                </div>
+        {% else %}
+            <div class="card shadow w-50 mx-auto">
+                <h6 class="text-dark p-3">You have zero notifications</h6>
+            </div>
+        {% endif %}
+    </div>
+    {% include 'Main_app/footer.html' %}
+{% endblock %}

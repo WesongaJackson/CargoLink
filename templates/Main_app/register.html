@@ -1,0 +1,39 @@
+{% extends 'Main_app/base.html' %}
+{% load crispy_forms_filters %}
+{% block title %}
+ |Register
+{% endblock  %}
+{% block content %}
+{% include 'Main_app/navbar.html' %}
+
+
+
+
+    <style>
+    .asteriskField{
+        display: none;
+    }
+    .form-text{
+        display: none;
+    }
+    </style>
+<div style="margin-top:40px;margin-bottom:40px;" class="container mt-100">
+    <div class="row justify-content-center">
+        <div class="col-sm-4">
+            <form action="{% url 'signup' %}" method="POST" class="shadow py-4 px-3 mt-5">
+                 <div class="breadcrumb-text">
+                    <p class="text-center mb-3">Sign Up</p>
+                </div>
+                {% csrf_token %}
+                {{ form | crispy }}
+                <button class="btn btn-dark rounded-0 w-100">Register</button>
+                <div class="mt-3">
+                    Already have an account? <a  class="card-link" href="{% url 'signin' %}">login here</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% include 'Main_app/footer.html' %}
+
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'Main_app/base.html' %}
+{% load humanize %}
+{% block title %}
+   |Page Not Fount!!!
+{% endblock %}
+{% block content %}
+    <div class="container vh-100  d-flex justify-content-center align-itema-center mt-100">
+        <div class="content text-center">
+            <h1 class="text-black-50 mb-5" style="font-size: 300px">404</h1>
+             <p class="text-dark mt-100">
+                The page you are looking for is not available
+
+            </p>
+             <a class="btn btn-primary" href="{% url 'home' %}">Go Home</a>
+        </div>
+    </div>
+{% endblock %}

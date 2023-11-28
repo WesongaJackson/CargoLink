@@ -1,0 +1,80 @@
+{% extends "Main_app/base.html" %}
+{% load crispy_forms_filters %}
+{% load humanize %}
+{% load static %}{% block title %}
+    |Booking
+{% endblock %}
+{% block content %}
+    <style>
+        .asteriskField {
+            display: none;
+        }
+    </style>
+    {% include 'Main_app/navbar.html' %}
+
+{#   vehicle details to book #}
+    <div class="latest-news mt-100 mb-5">
+        <div class="container">
+        <div class="breadcrumb-text">
+            <p class="text-center mb-5 mt-5">Selected Vehicle for Transport</p>
+
+                    </div>
+            <div class="row">
+                <div class="col-md-9  col-sm-12 mx-auto ">
+                    <div class="card rounded-0 shadow w-100">
+                        <img src="{{ vehicle.image.url }}" class=" card-img-top w-75 m-3 mx-auto  overflow-hidden ">
+                     <h5 class="text-center "> {{ vehicle.name|title }} </h5>
+                        <h5 class="text-center "> Model : {{ vehicle.model|title }} </h5>
+                        <h5 class=" text-center"> Type : {{ vehicle.type |title }}</h5>
+                        <h6 class=" text-center mb-2">Price : Ksh.{{ vehicle.price | intcomma }}</h6>
+                        <p class="card-text text-center mb-2">
+                            <span><i class="fas fa-map marker"></i> {{ vehicle.location|title }}</span>
+                            <span><i class="fas fa-bussiness-time"></i>For- {{ vehicle.for_hire_or_sell|title }}</span>
+                        </p>
+                        <div class="d-flex ">
+                            {% if perms.main_app.delete_vehicle %}
+                                <a href="{% url 'delete' pk=vehicle.pk %}"
+                                   class="btn btn-danger rounded-0 w-50 ml-4  my-3">Delete</a>
+                            {% endif %}
+                              <a href="{% url 'home'  %}"
+                                   class="btn btn-dark rounded-0 w-50 ml-4  my-3">cancel</a>
+                            <button type="button" class="btn btn-dark rounded-0 w-50 ms-2 mr-4 my-3" data-toggle="modal"
+                                    data-target="#paymentModal">Continue to pay
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Payment Modal -->
+    <div class="modal fade" id="paymentModal" tabindex="-1" role="dialog" aria-labelledby="paymentModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content ">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="paymentModalLabel">Enter M-Pesa Number</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{% url 'initiate' pk=vehicle.pk %}" method="post">
+                        {% csrf_token %}
+                        <div class=" form-group mb-4">
+                            <label for="phone" class="form-label">Phone Number</label>
+                            <input type="tel" class="form-control rounded-0 " id="phone" placeholder="254790907012" required name="phone">
+                        </div>
+
+                        <button type="submit" class="btn btn-dark w-100 mb-3 rounded-0"  >Make Payment</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    {% include 'Main_app/footer.html' %}
+
+{% endblock %}

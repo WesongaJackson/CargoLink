@@ -1,0 +1,112 @@
+{% load static %}
+<style>
+    .navbar-toggler-icon i {
+        color: #F28123 !important;
+    }
+
+    .navbar-toggler-icon i:hover {
+        color: #fff !important;
+    }
+
+    .navbar-nav .nav-link {
+        color: #F28123 !important;
+    }
+
+    .navbar-nav .nav-link:hover {
+        color: #fff !important;
+    }
+
+    .dropdown-menu {
+        background: #051922;
+    }
+
+    .dropdown-menu .dropdown-item {
+        color: #F28123;
+    }
+
+    .dropdown-menu .dropdown-item:hover {
+        background: #051922;
+        color: #fff;
+    }
+
+
+</style>
+
+<nav class="navbar fixed-top navbar-expand-lg " style="background-color: #051922;">
+    <div class="container-fluid">
+        <a href="{% url 'home' %}">
+            <img style="Height:50px" src="{% static 'assets/img/logo.png' %}">
+
+        </a>
+
+        <div class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <span class="navbar-toggler-icon">
+    <i class="fas fa-bars"></i>
+  </span>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-3 mb-2 mb-lg-0">
+                {% if user.is_authenticated %}
+
+                    <li class="nav-item me-4">
+                        <a class="nav-link " href="{% url 'home' %}"><i class="fa-sharp fa-solid fa-house-chimney"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item me-4">
+                        <a class="nav-link " href="{% url 'create' %}"><i class="fa-sharp fa-solid fa-plus"></i> </a>
+                    </li>
+                    <li class="nav-item me-4">
+                        <a class="nav-link " href="{% url 'notification' %}"><i class="fa-sharp fa-solid fa-bell"></i>
+                            {% if unread_count > 0 %}
+                                <span class="badge bg-danger">{{ unread_count }}</span>
+                            {% endif %} </a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link " href="{% url 'index' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'about' %}">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="{% url 'services' %}">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="{% url 'contact' %}">Contact </a>
+                    </li>
+                {% endif %}
+
+
+            </ul>
+
+            <ul class="nav-item dropdown  text-white ">
+                {% if user.is_authenticated %}
+                    <img class=" dropdown-toggle" role="button" data-bs-toggle="dropdown"
+                         style="height: 40px; width: 40px; border-radius: 50%;" src="{{ user.profile.image.url }}"/>
+                {% else %}
+                    <a class=" dropdown-toggle" role="button" data-bs-toggle="dropdown"><img
+                            src="{% static 'assets/img/accounts.png' %}" alt="user image"
+                            style="height: 40px; width: 40px; border-radius: 50%;"></a>
+                {% endif %}
+
+                <ul class="dropdown-menu mr-3">
+                    {% if user.is_authenticated %}
+                        <li><a class="dropdown-item" href="{% url 'profile' %}">profile</a></li>
+
+                        <li><a class="dropdown-item" href="{% url 'signout' %}">Logout</a></li>
+
+
+                    {% else %}
+                        <li><a class="dropdown-item" href="{% url 'signup' %}">Register</a></li>
+                        <li><a class="dropdown-item" href="{% url 'signin' %}">Login</a></li>
+                    {% endif %}
+
+                </ul>
+            </ul>
+
+
+        </div>
+    </div>
+</nav>

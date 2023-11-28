@@ -1,0 +1,40 @@
+{% extends "Main_app/base.html" %}
+
+{% load static %}
+{% block title %}
+    |Payment
+{% endblock %}
+
+{% block content %}
+
+
+
+    {% include 'Main_app/navbar.html' %}
+    <div class="container mt-80  mb-5">
+        <div class="card shadow">
+            <div class="text-center card-body">
+                <h2 class="display-4 text-success">Payment Pending</h2>
+
+                <p class="lead"> Your payment is being Processed Please Wait</p>
+            </div>
+            <div class="spinner-border text-primary mb-5" role="status">
+                <span class="sr-only text-dark">Loading...</span>
+            </div>
+            <a class="btn btn-primary w-50 mx-auto mb-5" href="{% url 'check' transaction.merchant_request_id transaction.checkout_request_id %}">check transaction</a>
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+    {% include 'Main_app/footer.html' %}
+
+
+
+{% endblock %}

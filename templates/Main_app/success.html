@@ -1,0 +1,24 @@
+{% extends "Main_app/base.html" %}
+
+{% load static %}
+{% block title %}
+    Payment
+{% endblock %}
+
+{% block content %}
+    {% include 'Main_app/navbar.html' %}
+    <div class="container mt-80  mb-5">
+        <div class="card shadow">
+            <div class="card-body text-center ">
+                <h2 class="display-4 text-success">Payment Successful!</h2>
+                <p class="lead"> Thank you for your payment. Your booking is confirmed.</p>
+                <img src="{% static 'assets/img/success.png' %}" alt="Success Icon" class="img-fluid mt-4"
+                     style="max-width: 200px;">
+                <p class="mt-4 mb-5">
+                    <a href="{% url 'notification' %}" class="btn btn-primary">Check here</a>
+                </p>
+            </div>
+        </div>
+    </div>
+    {% include 'Main_app/footer.html' %}
+{% endblock %}

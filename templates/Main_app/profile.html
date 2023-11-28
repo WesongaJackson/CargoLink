@@ -1,0 +1,54 @@
+{% extends 'Main_app/base.html' %}
+
+{% load crispy_forms_filters %}
+{% block title %}
+    |Profile
+{% endblock %}
+{% block content %}
+    {% include 'Main_app/navbar.html' %}
+             <div class="w-50 justify-content-center mx-auto mt-80">{% include "Main_app/alerts.html" %}</div>
+
+
+    <div style="margin-top:40px;margin-bottom:40px;" class="container">
+        <div class="row justify-content-center ">
+
+            <div class="col-sm-4">
+
+            <h1 class="pt-5">My Profile</h1>
+
+
+                <img style="height: 100px; width: 100px; border-radius: 50%;" src="{{ user.profile.image.url }}"/>
+                <p class="card-text"><strong>Username:</strong> {{ user.username }}</p>
+                <p class="card-text"><strong>Name:</strong>
+                    {{ user.get_full_name }}
+                </p>
+                <br>
+                <p class="card-text"><strong>Email Address:</strong>
+                    {{ user.email }}</p>
+                <br>
+                {% if user.profile.phone_number %}
+                    <p class="card-text"><strong>Phone Number:</strong>
+                        {{ user.profile.phone_number }}
+                    </p>
+                {% endif %}
+
+                {% if user.profile.location %}
+                    <br>
+
+                    <p class="card-text"><strong>Location:</strong>
+                        {{ user.profile.location }}</p>
+                {% endif %}
+                <br>
+            <div class="d-flex">
+                <a href="{% url 'update_profile' %}" class="btn btn-dark rounded-0 mr-2">update</a>
+               <a href="{% url 'signout' %}" class="btn btn-dark rounded-0">logout</a>
+           </div>
+            </div>
+        </div>
+
+
+    </div>
+    {% include 'Main_app/footer.html' %}
+{% endblock %}
+
+    
