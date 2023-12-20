@@ -5,6 +5,7 @@
 {% endblock  %}
 {% block content %}
 {% include 'Main_app/navbar.html' %}
+    <div class="w-50 justify-content-center mx-auto mt-80">{% include "Main_app/alerts.html" %}</div>
 
 
 
@@ -16,6 +17,7 @@
         </style>
     <div style="margin-top:40px;margin-bottom:40px;" class="container">
         <div class="row justify-content-center">
+
             <div class="col-sm-4">
                 <form action="" method="POST" enctype="multipart/form-data" class="shadow py-4 px-3 mt-5">
                     {% csrf_token %}

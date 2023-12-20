@@ -38,7 +38,7 @@ def about(request):
 
 
 # contact view
-
+@csrf_exempt
 def contact(request):
     if request.method == "POST":
         name = request.POST['name']
@@ -112,6 +112,7 @@ def signin(request):
 
 
 # logoutview
+@csrf_exempt
 @login_required
 def signout(request):
     logout(request)
@@ -290,7 +291,7 @@ def initiate_payment(request, pk):
         json_response = response.json()
         if "ResponseCode" in json_response:
             code = json_response['ResponseCode']
-            if code == "0":
+            if code == 0:
                 mid = json_response['MerchantRequestID']
                 cid = json_response['CheckoutRequestID']
                 logger.info(f"{mid} {cid}")
@@ -347,7 +348,7 @@ def callback(request):
     }
     return JsonResponse(response_data)
 
-
+@csrf_exempt
 def check_payment(request, mid, cid):
     transaction = Transaction.objects.filter(merchant_request_id=mid, checkout_request_id=cid).first()
     if transaction:
